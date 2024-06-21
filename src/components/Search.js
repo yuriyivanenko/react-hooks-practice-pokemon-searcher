@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react'
 
-function Search() {
+function Search({ handleSearchText }) {
+  const handleSearchChange = ({ target }) => handleSearchText(target.value)
+
   return (
-    <div className="ui search">
-      <div className="ui icon input">
-        <input className="prompt" />
-        <i className="search icon" />
+    <div className='ui search'>
+      <div className='ui icon input'>
+        <input className='prompt' onChange={handleSearchChange} />
+        <i className='search icon' />
       </div>
     </div>
-  );
+  )
 }
 
-export default Search;
+export default Search
