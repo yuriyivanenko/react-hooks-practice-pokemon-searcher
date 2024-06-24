@@ -1,21 +1,27 @@
-import React from "react";
-import PokemonCollection from "./PokemonCollection";
-import PokemonForm from "./PokemonForm";
-import Search from "./Search";
-import { Container } from "semantic-ui-react";
+import React, { useState } from 'react'
+import PokemonCollection from './PokemonCollection'
+import PokemonForm from './PokemonForm'
+import Search from './Search'
+import { Container } from 'semantic-ui-react'
 
 function PokemonPage() {
+  const [searchText, setSearchText] = useState('')
+  const [fetchTrigger, setFetchTrigger] = useState(false)
+
+  const handleSearchText = (text) => setSearchText(text)
+  const handleTrigger = () => setFetchTrigger(!fetchTrigger)
+
   return (
     <Container>
       <h1>Pokemon Searcher</h1>
       <br />
-      <PokemonForm />
+      <PokemonForm handleTrigger={handleTrigger} />
       <br />
-      <Search />
+      <Search handleSearchText={handleSearchText} />
       <br />
-      <PokemonCollection />
+      <PokemonCollection searchText={searchText} fetchTrigger={fetchTrigger} />
     </Container>
-  );
+  )
 }
 
-export default PokemonPage;
+export default PokemonPage
