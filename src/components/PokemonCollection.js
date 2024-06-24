@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import PokemonCard from './PokemonCard'
 import { Card } from 'semantic-ui-react'
+import { db } from './firebaseConfig'
+import { collection, getDocs } from 'firebase/firestore'
 
 function PokemonCollection({ searchText, fetchTrigger }) {
   const [pokemonList, setPokemonList] = useState(null)
 
-  useEffect(() => {
-    fetch('http://localhost:3001/pokemon')
-      .then((res) => res.json())
-      .then((data) => setPokemonList(data))
-  }, [fetchTrigger])
+  // useEffect(() => {
+  //   fetch('http://localhost:3001/pokemon')
+  //     .then((res) => res.json())
+  //     .then((data) => setPokemonList(data))
+  // }, [fetchTrigger])
 
   const searchPokemon = () => {
     const length = searchText.length
@@ -19,6 +21,16 @@ function PokemonCollection({ searchText, fetchTrigger }) {
       }
     })
   }
+
+  // FIREBASE CODE BELOW
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, 'pokemon'))
+      const items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      setPokemonList(items)
+    }
+    fetchData()
+  }, [fetchTrigger])
 
   const searchList = searchText.length > 0 ? searchPokemon() : pokemonList
   const sortedList = pokemonList ? [...searchList].sort((a, b) => a.id - b.id) : null
