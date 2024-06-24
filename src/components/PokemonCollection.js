@@ -7,12 +7,6 @@ import { collection, getDocs } from 'firebase/firestore'
 function PokemonCollection({ searchText, fetchTrigger }) {
   const [pokemonList, setPokemonList] = useState(null)
 
-  // useEffect(() => {
-  //   fetch('http://localhost:3001/pokemon')
-  //     .then((res) => res.json())
-  //     .then((data) => setPokemonList(data))
-  // }, [fetchTrigger])
-
   const searchPokemon = () => {
     const length = searchText.length
     return [...pokemonList].filter((pokemon) => {

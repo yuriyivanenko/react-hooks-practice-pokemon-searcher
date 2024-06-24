@@ -34,23 +34,6 @@ function PokemonForm({ handleTrigger }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // fetch('http://localhost:3001/pokemon', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((res) => res.json())
-    //   .then(handleTrigger)
-    //   .then(
-    //     setFormData({
-    //       name: '',
-    //       hp: '',
-    //       sprites: {
-    //         front: '',
-    //         back: '',
-    //       },
-    //     })
-    //   )
     try {
       await addDoc(collection(db, 'pokemon'), formData)
       setFormData({
