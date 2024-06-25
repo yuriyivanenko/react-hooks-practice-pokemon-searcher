@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import PokemonCard from './PokemonCard'
-import { Card } from 'semantic-ui-react'
-import { db } from './firebaseConfig'
-import { collection, getDocs } from 'firebase/firestore'
+import React, { useEffect, useState } from "react"
+import PokemonCard from "./PokemonCard"
+import { Card } from "semantic-ui-react"
+import { db } from "./firebaseConfig"
+import { collection, getDocs } from "firebase/firestore"
 
-function PokemonCollection({ searchText, fetchTrigger }) {
+function PokemonCollection({ searchText, fetchTrigger, userId }) {
   const [pokemonList, setPokemonList] = useState(null)
 
   const searchPokemon = () => {
@@ -19,7 +19,7 @@ function PokemonCollection({ searchText, fetchTrigger }) {
   // FIREBASE CODE BELOW
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'pokemon'))
+      const querySnapshot = await getDocs(collection(db, `users/${userId}/pokemon`))
       const items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
       setPokemonList(items)
     }
