@@ -7,6 +7,7 @@ function PokemonForm({ handleTrigger, userId }) {
   const [formData, setFormData] = useState({
     name: "",
     hp: "",
+    id: "",
     sprites: {
       front: "",
       back: "",
@@ -18,6 +19,7 @@ function PokemonForm({ handleTrigger, userId }) {
       if (target.name === "front" || target.name === "back") {
         return {
           ...prevData,
+          id: parseInt(target.value.split("/").slice(-1).join().split(".")[0]),
           sprites: {
             ...prevData.sprites,
             [target.name]: target.value,
