@@ -1,7 +1,13 @@
 // src/firebase.js
-import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
+import {
+  getAuth,
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserLocalPersistence,
+  browserSessionPersistence,
+} from "firebase/auth"
 // Add other services you plan to use, e.g., storage, functions
 
 // Your web app's Firebase configuration
@@ -21,5 +27,6 @@ const app = initializeApp(firebaseConfig)
 // Initialize services
 const db = getFirestore(app)
 const auth = getAuth(app)
+
 // Export services to use in your components
 export { db, auth }

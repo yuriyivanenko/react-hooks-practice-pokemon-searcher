@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Container } from "semantic-ui-react"
 import PokemonCollection from "./PokemonCollection"
 import PokemonForm from "./PokemonForm"
