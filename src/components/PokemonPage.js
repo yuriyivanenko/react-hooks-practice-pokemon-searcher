@@ -5,6 +5,7 @@ import PokemonForm from "./PokemonForm"
 import Search from "./Search"
 import Signup from "./SignUp"
 import Login from "./Login"
+import Logout from "./Logout"
 import { UserContext } from "../contexts/UserContext"
 
 function PokemonPage() {
@@ -18,11 +19,13 @@ function PokemonPage() {
 
   return (
     <Container>
-      <button style={{ marginBottom: "20px" }} onClick={() => setShowSignUp(!showSignUp)}>
-        Sign Up Form
-      </button>
+      {!user && (
+        <button style={{ marginBottom: "20px" }} onClick={() => setShowSignUp(!showSignUp)}>
+          Sign Up Form
+        </button>
+      )}
       {showSignUp && <Signup setUser={setUser} />}
-      <Login setUser={setUser} />
+      {!user ? <Login setUser={setUser} /> : <Logout />}
       <h1>Pokemon Searcher</h1>
       {user && <h3>Welcome {user.email}</h3>}
       <br />
