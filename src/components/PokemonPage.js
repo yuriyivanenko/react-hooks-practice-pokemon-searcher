@@ -1,25 +1,39 @@
-import React, { useState } from 'react'
-import PokemonCollection from './PokemonCollection'
-import PokemonForm from './PokemonForm'
-import Search from './Search'
-import { Container } from 'semantic-ui-react'
+import React, { useState } from "react"
+import { Container } from "semantic-ui-react"
+import PokemonCollection from "./PokemonCollection"
+import PokemonForm from "./PokemonForm"
+import Search from "./Search"
+import Signup from "./SignUp"
+import Login from "./Login"
 
 function PokemonPage() {
-  const [searchText, setSearchText] = useState('')
+  const [user, setUser] = useState(null)
+  const [searchText, setSearchText] = useState("")
   const [fetchTrigger, setFetchTrigger] = useState(false)
+  const [showSignUp, setShowSignUp] = useState(false)
 
   const handleSearchText = (text) => setSearchText(text)
   const handleTrigger = () => setFetchTrigger(!fetchTrigger)
 
   return (
     <Container>
+      <button style={{ marginBottom: "20px" }} onClick={() => setShowSignUp(!showSignUp)}>
+        Sign Up Form
+      </button>
+      {showSignUp && <Signup setUser={setUser} />}
+      <Login setUser={setUser} />
       <h1>Pokemon Searcher</h1>
+      {user && <h3>Welcome {user.email}</h3>}
       <br />
-      <PokemonForm handleTrigger={handleTrigger} />
+      {user && <PokemonForm handleTrigger={handleTrigger} userId={user.uid} />}
       <br />
       <Search handleSearchText={handleSearchText} />
       <br />
-      <PokemonCollection searchText={searchText} fetchTrigger={fetchTrigger} />
+      {!user ? (
+        <h3>Sign in or sign up to get started with your Pokemon collection</h3>
+      ) : (
+        <PokemonCollection searchText={searchText} fetchTrigger={fetchTrigger} userId={user.uid} />
+      )}
     </Container>
   )
 }
