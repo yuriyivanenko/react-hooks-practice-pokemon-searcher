@@ -1,13 +1,14 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { Container } from "semantic-ui-react"
 import PokemonCollection from "./PokemonCollection"
 import PokemonForm from "./PokemonForm"
 import Search from "./Search"
 import Signup from "./SignUp"
 import Login from "./Login"
+import { UserContext } from "../contexts/UserContext"
 
 function PokemonPage() {
-  const [user, setUser] = useState(null)
+  const { user, setUser } = useContext(UserContext)
   const [searchText, setSearchText] = useState("")
   const [fetchTrigger, setFetchTrigger] = useState(false)
   const [showSignUp, setShowSignUp] = useState(false)
