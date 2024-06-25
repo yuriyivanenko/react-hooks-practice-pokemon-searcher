@@ -1,7 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/App";
-import "semantic-ui-css/semantic.min.css";
-import "./index.css";
+import React from "react"
+import ReactDOM from "react-dom"
+import "semantic-ui-css/semantic.min.css"
+import App from "./components/App"
+import "./index.css"
+import { UserProvider } from "./contexts/UserContext"
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <UserProvider>
+    <App />
+  </UserProvider>,
+  document.getElementById("root")
+)
